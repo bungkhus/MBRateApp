@@ -33,7 +33,7 @@ class MBRateUsViewController : UIViewController {
     required init?(coder aDecoder: NSCoder) {
         shouldRate = false
         let podBundle = Bundle(for: type(of: self))
- 
+        
         starImageOn = UIImage(named: "rateus_on", in: podBundle, compatibleWith: nil)!
         starImageOff = UIImage(named: "rateus_off", in: podBundle, compatibleWith: nil)!
         
@@ -89,9 +89,11 @@ class MBRateUsViewController : UIViewController {
         self.dismissButton.tintColor = self.rateUsInfo?.dismissButtonColor
     }
     
-
+    
     @IBAction func dismiss(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: { _ in self.dismissBlock?()})
+        self.dismiss(animated: true) {
+            self.dismissBlock?()
+        }
     }
     
     @IBAction func starTouchedDown(_ sender: UIButton) {
@@ -140,7 +142,7 @@ class MBRateUsViewController : UIViewController {
                 if let itunesId = self.rateUsInfo?.itunesId {
                     UIApplication.shared.openURL(URL(string: "http://itunes.apple.com/app/id\(itunesId)")!)
                 }
-
+                
                 self.positiveBlock?()
             }else {
                 self.negativeBlock?()
@@ -148,3 +150,4 @@ class MBRateUsViewController : UIViewController {
         })
     }
 }
+
